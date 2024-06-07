@@ -2,7 +2,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import {SafeAreaView} from 'react-native';
 //// The product detail screen
 
 import {store} from './src/store/store';
@@ -17,17 +17,19 @@ const Stack = createStackNavigator();
 const Navigation = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            header: () => <Header />, // Use the custom header
-          }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="ProductDetail" component={ProductDetail} />
-          <Stack.Screen name="CartScreen" component={CartScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              header: () => <Header />, // Use the custom header
+            }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="ProductDetail" component={ProductDetail} />
+            <Stack.Screen name="CartScreen" component={CartScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
     </Provider>
   );
 };
