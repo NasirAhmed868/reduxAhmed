@@ -8,6 +8,7 @@ const Header = () => {
   const navigation = useNavigation();
   const cartCount = useSelector(selectCartCount);
   console.log('cartCount', cartCount);
+//   console.log('cartCount', cartCount);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Product Store</Text>

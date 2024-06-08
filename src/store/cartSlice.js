@@ -20,7 +20,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       console.log('fvfadrr', action.payload.id);
- 
+
       const rsddd = state?.map(item =>
         item.id == action.payload.id
           ? {...item, quantity: item.quantity - 1}
@@ -33,5 +33,6 @@ const cartSlice = createSlice({
 });
 
 export const {addToCart, removeFromCart} = cartSlice.actions;
-export const selectCart = state => state.cart;
+export const selectCartItems = state => state.cart.items;
+export const selectCartCount = state => state.cart.cartCount;
 export default cartSlice.reducer;
