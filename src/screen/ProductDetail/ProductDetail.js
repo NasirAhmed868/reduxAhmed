@@ -1,8 +1,14 @@
 // ProductDetail.js
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-
-import {cartSlice, addToCart, removeFromCart} from '../../store/cartSlice';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import {addToCart, removeFromCart} from '../../store/cartSlice';
 import {useDispatch} from 'react-redux';
 
 const ProductDetail = ({route}) => {
@@ -11,23 +17,26 @@ const ProductDetail = ({route}) => {
   //   const { addToCart, removeFromCart } = useContext(CartContext);
 
   return (
-    <View style={styles.container}>
-      <Image source={item.profile_image} style={styles.image} />
-      <Text style={styles.brandName}>{item.brandName}</Text>
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.price}>{item.Price}</Text>
-      <Text style={styles.quantity}>{item.quantity}</Text>
-      <TouchableOpacity
-        onPress={() => dispatch(addToCart(item))}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Add to cart</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => dispatch(removeFromCart(item))}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Remove from cart</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Image source={item.profile_image} style={styles.image} />
+        <Text style={styles.brandName}>{item.brandName}</Text>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.price}>{item.Price}</Text>
+        <Text style={styles.quantity}>{item.quantity}</Text>
+        <TouchableOpacity
+          onPress={() => dispatch(addToCart(item))}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Add to cart</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          onPress={() => dispatch(removeFromCart(item))}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Remove from cart</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 

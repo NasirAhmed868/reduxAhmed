@@ -1,38 +1,44 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      console.log('action', action.payload);
-      console.log('sate', state);
-      const {id} = action.payload;
-      const isItemExist = state?.find(item => item.id === id);
-      if (isItemExist) {
-        return state?.map(item =>
-          item.id == id ? {...item, quantity: item.quantity + 1} : item,
-        );
-      } else {
-        return [...state, {...action.payload, quantity: 1}];
+      const { id } = action.payload;
+      const isItemExist = state.find(item => item.id === id);
+      if (!isItemExist) {
+        state.push({ ...action.payload, quantity: 1 });
       }
     },
     removeFromCart: (state, action) => {
-      console.log('fvfadrr', action.payload.id);
-
-      const rsddd = state?.map(item =>
-        item.id == action.payload.id
-          ? {...item, quantity: item.quantity - 1}
-          : item,
-      );
-      console.log('print', rsddd);
-      return rsddd;
+      const { id } = action.payload;
+      const itemIndex = state.findIndex(item => item.id === id);
+      if (itemIndex !== -1) {
+        if (state[itemIndex].quantity > 1) {
+          state[itemIndex].quantity -= 1;
+        } else {
+          return state.filter(item => item.id !== id);
+        }
+      }
+    },
+    incrementQuantity: (state, action) => {
+      const item = state.find(item => item.id === action.payload.id);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    decrementQuantity: (state, action) => {
+      const item = state.find(item => item.id === action.payload.id);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      }
     },
   },
 });
 
-export const {addToCart, removeFromCart} = cartSlice.actions;
-export const selectCartItems = state => state.cart.items;
-export const selectCartCount = state => state.cart.cartCount;
+export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+export const selectCart = state => state.cart;
 export default cartSlice.reducer;
