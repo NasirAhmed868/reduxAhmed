@@ -9,6 +9,15 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {addToCart, removeFromCart} from '../../store/cartSlice';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import {addToCart, removeFromCart} from '../../store/cartSlice';
 import {useDispatch} from 'react-redux';
 
 const ProductDetail = ({route}) => {
